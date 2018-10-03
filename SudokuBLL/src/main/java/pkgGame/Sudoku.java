@@ -61,6 +61,7 @@ public class Sudoku extends LatinSquare {
 
 		int[][] puzzle = new int[iSize][iSize];
 		super.setLatinSquare(puzzle);
+		FillDiagonalRegions();
 	}
 
 	/**
@@ -264,11 +265,24 @@ public class Sudoku extends LatinSquare {
 	 *            puzzle row
 	 * @param iValue
 	 *            given value
-	 * @return - returns 'true' if the proposed value is valid for the row and
-	 *         column
+	 * @return - returns 'true' if the proposed value is valid for the row and column
 	 */
 	public boolean isValidValue(int iCol, int iRow, int iValue) {
-		return false;
+		
+		if (doesElementExist(super.getRow(iRow),iValue))
+		{
+			return false;
+		}
+		if (doesElementExist(super.getColumn(iCol),iValue))
+		{
+			return false;
+		}
+		if (doesElementExist(this.getRegion(iCol, iRow),iValue))
+		{
+			return false;
+		}
+		
+		return true;
 	}
 
 	/**
