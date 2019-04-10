@@ -16,6 +16,17 @@ import pkgHelper.LatinSquare;
  */
 public class Sudoku extends LatinSquare {
 
+	private class Cell {
+		private int iCol;
+		private int iRow;
+		private java.util.ArrayList<java.lang.Integer> lstValidValues;
+
+		Cell(int iRow, int iCol) {
+			this.iRow = iRow;
+			this.iCol = iCol;
+		}
+	}
+
 	/**
 	 * 
 	 * iSize - the length of the width/height of the Sudoku puzzle.
@@ -43,10 +54,8 @@ public class Sudoku extends LatinSquare {
 	 * 
 	 * @version 1.2
 	 * @since Lab #2
-	 * @param iSize-
-	 *            length of the width/height of the puzzle
-	 * @throws Exception
-	 *             if the iSize given doesn't have a whole number square root
+	 * @param iSize- length of the width/height of the puzzle
+	 * @throws Exception if the iSize given doesn't have a whole number square root
 	 */
 	public Sudoku(int iSize) throws Exception {
 
@@ -70,11 +79,9 @@ public class Sudoku extends LatinSquare {
 	 * 
 	 * @version 1.2
 	 * @since Lab #2
-	 * @param puzzle
-	 *            - given (working) Sudoku puzzle. Use for testing
-	 * @throws Exception
-	 *             will be thrown if the length of the puzzle do not have a whole
-	 *             number square root
+	 * @param puzzle - given (working) Sudoku puzzle. Use for testing
+	 * @throws Exception will be thrown if the length of the puzzle do not have a
+	 *                   whole number square root
 	 */
 	public Sudoku(int[][] puzzle) throws Exception {
 		super(puzzle);
@@ -141,10 +148,8 @@ public class Sudoku extends LatinSquare {
 	 * 
 	 * @version 1.2
 	 * @since Lab #2
-	 * @param iCol
-	 *            given column
-	 * @param iRow
-	 *            given row
+	 * @param iCol given column
+	 * @param iRow given row
 	 * @return - returns a one-dimensional array from a given region of the puzzle
 	 */
 	public int[] getRegion(int iCol, int iRow) {
@@ -169,8 +174,7 @@ public class Sudoku extends LatinSquare {
 	 * 
 	 * @version 1.2
 	 * @since Lab #2
-	 * @param r
-	 *            given region
+	 * @param r given region
 	 * @return - returns a one-dimensional array from a given region of the puzzle
 	 */
 
@@ -259,29 +263,24 @@ public class Sudoku extends LatinSquare {
 	 * 
 	 * @version 1.2
 	 * @since Lab #2
-	 * @param iCol
-	 *            puzzle column
-	 * @param iRow
-	 *            puzzle row
-	 * @param iValue
-	 *            given value
-	 * @return - returns 'true' if the proposed value is valid for the row and column
+	 * @param iCol   puzzle column
+	 * @param iRow   puzzle row
+	 * @param iValue given value
+	 * @return - returns 'true' if the proposed value is valid for the row and
+	 *         column
 	 */
-	public boolean isValidValue(int iRow,int iCol,  int iValue) {
-		
-		if (doesElementExist(super.getRow(iRow),iValue))
-		{
+	public boolean isValidValue(int iRow, int iCol, int iValue) {
+
+		if (doesElementExist(super.getRow(iRow), iValue)) {
 			return false;
 		}
-		if (doesElementExist(super.getColumn(iCol),iValue))
-		{
+		if (doesElementExist(super.getColumn(iCol), iValue)) {
 			return false;
 		}
-		if (doesElementExist(this.getRegion(iCol, iRow),iValue))
-		{
+		if (doesElementExist(this.getRegion(iCol, iRow), iValue)) {
 			return false;
 		}
-		
+
 		return true;
 	}
 
@@ -343,8 +342,7 @@ public class Sudoku extends LatinSquare {
 	 * 
 	 * @version 1.3
 	 * @since Lab #3
-	 * @param r
-	 *            - Given region number
+	 * @param r - Given region number
 	 */
 	private void SetRegion(int r) {
 		int iValue = 0;
@@ -377,8 +375,7 @@ public class Sudoku extends LatinSquare {
 	 * 
 	 * @version 1.3
 	 * @since Lab #3
-	 * @param r
-	 *            - Given region number
+	 * @param r - Given region number
 	 */
 	private void ShuffleRegion(int r) {
 		int[] region = getRegion(r);
@@ -396,8 +393,7 @@ public class Sudoku extends LatinSquare {
 	 * 
 	 * @version 1.3
 	 * @since Lab #3
-	 * @param ar
-	 *            given one-dimension array
+	 * @param ar given one-dimension array
 	 */
 	private void shuffleArray(int[] ar) {
 
