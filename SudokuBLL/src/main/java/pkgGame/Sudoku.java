@@ -25,6 +25,27 @@ public class Sudoku extends LatinSquare {
 			this.iRow = iRow;
 			this.iCol = iCol;
 		}
+		
+		public int getiRow() {
+			return iRow;
+		}
+		
+		public int getiCol() {
+			return iCol;
+		}
+		
+		/*
+		 * GetNextCell - get the next cell, return 'null' if there isn't a next cell to find
+		 */
+		public Sudoku.Cell getNextCell(Sudoku.Cell c) {
+			if ((getiRow() == iSize) && ((getiCol() + 1) == iSize)) {
+				return null;
+			} else if ((getiCol() + 1) == iSize) {
+				return new Cell(getiRow() + 1, 0);
+			} else {
+				return new Cell(getiRow(), getiCol() + 1);
+			}
+		}
 	}
 
 	/**
