@@ -1,6 +1,11 @@
 package pkgGame;
 
 import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Objects;
 import java.util.Random;
 
 import pkgHelper.LatinSquare;
@@ -21,7 +26,8 @@ public class Sudoku extends LatinSquare {
 		private int iRow;
 		private java.util.ArrayList<java.lang.Integer> lstValidValues;
 
-		Cell(int iRow, int iCol) {
+		public Cell(int iRow, int iCol) {
+			super();
 			this.iRow = iRow;
 			this.iCol = iCol;
 		}
@@ -34,7 +40,7 @@ public class Sudoku extends LatinSquare {
 			return iCol;
 		}
 		
-		/*
+		/**
 		 * GetNextCell - get the next cell, return 'null' if there isn't a next cell to find
 		 */
 		public Sudoku.Cell getNextCell(Sudoku.Cell c) {
@@ -45,6 +51,25 @@ public class Sudoku extends LatinSquare {
 			} else {
 				return new Cell(getiRow(), getiCol() + 1);
 			}
+			//(Cell) cells.get(Objects.hash(iRow,iCol));
+		}
+		
+		@Override
+		public int hashCode() {
+			return Objects.hash(iRow, iCol);
+		}
+		
+		public java.util.ArrayList<java.lang.Integer> getLstValidValues() {
+			//TODO
+			return null;
+		}
+		
+		public void set1stValidValues(HashSet<Integer> hsValidValues) {
+			lstValidValues = new ArrayList<Integer>(hsValidValues);
+		}
+		
+		public void ShuffleValidValues() {
+			Collections.shuffle(lstValidValues);
 		}
 	}
 
@@ -66,7 +91,9 @@ public class Sudoku extends LatinSquare {
 	 */
 
 	private int iSqrtSize;
-
+	
+	private HashMap<java.lang.Integer, Cell> cells = new HashMap<Integer, Cell>();
+	
 	/**
 	 * Sudoku - for Lab #2... do the following:
 	 * 
@@ -116,6 +143,19 @@ public class Sudoku extends LatinSquare {
 
 	}
 
+	/**
+	 * getAllValidCellValues - This method will return all the valid values remaining for a
+	 * given cell (by Col/Row). For example, Cell [0,0] should return [3,4] 
+	 * 0 1 0 0
+	 * 2 0 0 4
+     * 0 0 0 9
+     * 0 0 0 0
+	 */
+	private java.util.HashSet<java.lang.Integer> getAllValidCellValues​(int iCol, int iRow) {
+		//TODO
+		return null;
+	}
+	
 	/**
 	 * getPuzzle - return the Sudoku puzzle
 	 * 
