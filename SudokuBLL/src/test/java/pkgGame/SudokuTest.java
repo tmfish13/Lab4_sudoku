@@ -135,6 +135,13 @@ public class SudokuTest {
 	@Test
 	
 	public void ShuffleValidValues_test(){
+		testArray = lstValidValues;
+		assertFalse(assertEquals(testArray, ShuffleValidValues()));
+	}
+	
+	@Test
+	
+	public void Sudoku_Test_Filled(){
 		return null;
 	}
 
