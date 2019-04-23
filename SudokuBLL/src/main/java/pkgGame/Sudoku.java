@@ -31,17 +31,18 @@ public class Sudoku extends LatinSquare {
 			this.iRow = iRow;
 			this.iCol = iCol;
 		}
-		
+
 		public int getiRow() {
 			return iRow;
 		}
-		
+
 		public int getiCol() {
 			return iCol;
 		}
-		
+
 		/**
-		 * GetNextCell - get the next cell, return 'null' if there isn't a next cell to find
+		 * GetNextCell - get the next cell, return 'null' if there isn't a next cell to
+		 * find
 		 */
 		public Sudoku.Cell getNextCell(Sudoku.Cell c) {
 			if ((getiRow() == iSize) && ((getiCol() + 1) == iSize)) {
@@ -51,23 +52,23 @@ public class Sudoku extends LatinSquare {
 			} else {
 				return new Cell(getiRow(), getiCol() + 1);
 			}
-			//(Cell) cells.get(Objects.hash(iRow,iCol));
+			// (Cell) cells.get(Objects.hash(iRow,iCol));
 		}
-		
+
 		@Override
 		public int hashCode() {
 			return Objects.hash(iRow, iCol);
 		}
-		
+
 		public java.util.ArrayList<java.lang.Integer> getLstValidValues() {
-			//TODO
+			// TODO
 			return null;
 		}
-		
+
 		public void set1stValidValues(HashSet<Integer> hsValidValues) {
 			lstValidValues = new ArrayList<Integer>(hsValidValues);
 		}
-		
+
 		public void ShuffleValidValues() {
 			Collections.shuffle(lstValidValues);
 		}
@@ -89,11 +90,10 @@ public class Sudoku extends LatinSquare {
 	 * @version 1.2
 	 * @since Lab #2
 	 */
-
 	private int iSqrtSize;
-	
+
 	private HashMap<java.lang.Integer, Cell> cells = new HashMap<Integer, Cell>();
-	
+
 	/**
 	 * Sudoku - for Lab #2... do the following:
 	 * 
@@ -118,7 +118,7 @@ public class Sudoku extends LatinSquare {
 
 		int[][] puzzle = new int[iSize][iSize];
 		super.setLatinSquare(puzzle);
-		FillDiagonalRegions();
+		fillDiagonalRegions();
 	}
 
 	/**
@@ -140,22 +140,49 @@ public class Sudoku extends LatinSquare {
 		} else {
 			throw new Exception("Invalid size");
 		}
-
 	}
 
 	/**
-	 * getAllValidCellValues - This method will return all the valid values remaining for a
-	 * given cell (by Col/Row). For example, Cell [0,0] should return [3,4] 
-	 * 0 1 0 0
-	 * 2 0 0 4
-     * 0 0 0 9
-     * 0 0 0 0
+	 * SetCells - purpose of this method is to create a HashMap of all the cells in
+	 * the puzzle. If the puzzle is 9X9, there will be 81 cells in the puzzle. The
+	 * key for the HashMap is the Cell's hash code The value for the HashMap is the
+	 * Cell. The values in the HashSet for each cell's valid values should be
+	 * shuffled
+	 */
+	private void setCells() {
+
+//		for (int iRow = 0; iRow < iSize; iRow++) {
+//			for (int iCol = 0; iCol < iSize; iCol++) {
+//
+//				Cell c = new Cell(iRow, iCol);
+//				c.setlstValidValues(getAllValidCellValues(iCol, iRow));
+//				c.ShuffleValidValues();
+//				cells.put(c.hashCode(), c);
+//			}
+//		}
+	}
+
+	/**
+	 * ShowAvailableValues
+	 */
+	private void showAvailableValues() {
+		// TODO
+	}
+
+	/**
+	 * getAllValidCellValues - This method will return all the valid values
+	 * remaining for a given cell (by Col/Row). For example, Cell [0,0] should
+	 * return [3,4] <br>
+	 * 0 1 0 0 <br>
+	 * 2 0 0 4 <br>
+	 * 0 0 0 9 <br>
+	 * 0 0 0 0 <br>
 	 */
 	private java.util.HashSet<java.lang.Integer> getAllValidCellValues​(int iCol, int iRow) {
-		//TODO
+		// TODO
 		return null;
 	}
-	
+
 	/**
 	 * getPuzzle - return the Sudoku puzzle
 	 * 
@@ -238,7 +265,6 @@ public class Sudoku extends LatinSquare {
 	 * @param r given region
 	 * @return - returns a one-dimensional array from a given region of the puzzle
 	 */
-
 	public int[] getRegion(int r) {
 
 		int[] reg = new int[super.getLatinSquare().length];
@@ -319,6 +345,16 @@ public class Sudoku extends LatinSquare {
 	}
 
 	/**
+	 * 
+	 * @param c
+	 * @param iValue
+	 * @return returns 'true' if the proposed value is valid for the row and column
+	 */
+	public boolean isValidValue(Cell c, int iValue) {
+		return this.isValidValue(c.getiRow(), c.getiCol(), iValue);
+	}
+
+	/**
 	 * isValidValue - test to see if a given value would 'work' for a given column /
 	 * row
 	 * 
@@ -374,12 +410,12 @@ public class Sudoku extends LatinSquare {
 	 * @version 1.3
 	 * @since Lab #3
 	 */
-	private void FillDiagonalRegions() {
+	private void fillDiagonalRegions() {
 
 		for (int i = 0; i < iSize; i = i + iSqrtSize) {
 			System.out.println("Filling region: " + getRegionNbr(i, i));
-			SetRegion(getRegionNbr(i, i));
-			ShuffleRegion(getRegionNbr(i, i));
+			setRegion(getRegionNbr(i, i));
+			shuffleRegion(getRegionNbr(i, i));
 		}
 	}
 
@@ -405,7 +441,7 @@ public class Sudoku extends LatinSquare {
 	 * @since Lab #3
 	 * @param r - Given region number
 	 */
-	private void SetRegion(int r) {
+	private void setRegion(int r) {
 		int iValue = 0;
 
 		iValue = 1;
@@ -438,7 +474,7 @@ public class Sudoku extends LatinSquare {
 	 * @since Lab #3
 	 * @param r - Given region number
 	 */
-	private void ShuffleRegion(int r) {
+	private void shuffleRegion(int r) {
 		int[] region = getRegion(r);
 		shuffleArray(region);
 		int iCnt = 0;
