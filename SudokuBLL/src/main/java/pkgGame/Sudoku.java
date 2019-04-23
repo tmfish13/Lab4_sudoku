@@ -503,4 +503,45 @@ public class Sudoku extends LatinSquare {
 			ar[i] = a;
 		}
 	}
+	
+	private HashSet<Integer> getAllValidCellValues(int iRow, int iCol){
+		HashSet<Integer> range = new HashSet<Integer>();
+		if(this.getPuzzle()[iRow][iCol] > 0) {
+			range.add(new Integer(this.getPuzzle()[iRow][iCol]));
+		}
+		
+		for (int i = 0; i < iSize; i++) {
+			range.add(i+1);
+		}
+		
+		HashSet<Integer> used = new HashSet<Integer>();
+		Collections.addAll(used, Arrays.stream(super.getRow(iRow)).boxed().toArray(Integer[]::new));
+		Collections.addAll(used, Arrays.stream(super.getColumn(iCol)).boxed().toArray(Integer[]::new));
+		Collections.addAll(used, Arrays.stream(super.getRegion(iCol, iRow)).boxed().toArray(Integer[]::new));
+		
+		range.removeAll(used);
+		return range;
+		
+	}
+	private boolean fillRemaining(Cell c) {
+		
+		if (c == null) {
+			return true;
+		}
+		
+		for(int value: c.getLstValidValues()) {
+			if (isValidValue(c, value)) {
+				this.getPuzzle()[c.getiRow()][c.getiCol()] - value;
+				
+				if (fillRemaining(c.getNextCell(c))){
+					return true;
+				}
+				this.getPuzzle()[c.getiRow()][c.getiCol()] = 0;
+				
+			}
+		}
+		
+		return false;
+	}
+
 }
