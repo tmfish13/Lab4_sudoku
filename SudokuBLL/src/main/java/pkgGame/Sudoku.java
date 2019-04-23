@@ -119,6 +119,8 @@ public class Sudoku extends LatinSquare {
 		int[][] puzzle = new int[iSize][iSize];
 		super.setLatinSquare(puzzle);
 		fillDiagonalRegions();
+		setCells();
+		fillRemaining();
 	}
 
 	/**
@@ -140,6 +142,9 @@ public class Sudoku extends LatinSquare {
 		} else {
 			throw new Exception("Invalid size");
 		}
+		
+		setCells();
+		fillRemaining();
 	}
 
 	/**
