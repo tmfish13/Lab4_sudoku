@@ -142,7 +142,8 @@ public class SudokuTest {
 	@Test
 	
 	public void Sudoku_Test_Filled(){
-		return null;
+		Sudoku_done = new Sudoku(9);
+		assertTrue(Sudoku_done.isSudoku());
 	}
 
 }
