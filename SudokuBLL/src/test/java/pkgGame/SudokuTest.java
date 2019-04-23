@@ -123,8 +123,19 @@ public class SudokuTest {
 
 	}
 
-
-
-
+	@Test
+	public void Cell_class_equals(){
+		
+		Cell c1 = new Cell(0, 0);
+		Cell c2 = new Cell(0, 0);
+		
+		assertEquals(c1, c2);
+	}
+	
+	@Test
+	
+	public void ShuffleValidValues_test(){
+		return null;
+	}
 
 }
